@@ -2,9 +2,10 @@ from os import getenv
 
 from requests import get
 
-remove_exits = getenv('REMOVE_EXITS', True)
+remove_exits = getenv('REMOVE_EXITS', "True")
 docs_url = getenv('DOCS_URL',
-                  "https://raw.githubusercontent.com/MicrosoftDocs/sql-docs/live/docs/connect/odbc/linux-mac/installing-the-microsoft-odbc-driver-for-sql-server.md")
+                  "https://raw.githubusercontent.com/MicrosoftDocs/sql-docs/live/docs/connect/odbc/linux-mac"
+                  "/installing-the-microsoft-odbc-driver-for-sql-server.md")
 distro = getenv("DISTRO", "Ubuntu")
 ODBC_version = getenv("ODBC_VERSION", "18")
 
