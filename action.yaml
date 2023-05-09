@@ -20,6 +20,7 @@ inputs:
 runs:
   using: composite
   steps:
+    - uses: actions/checkout@latest
     - run: |
         pip install requests
         python extract_instruction_from_readme.py | bash
