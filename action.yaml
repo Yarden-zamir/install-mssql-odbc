@@ -24,3 +24,4 @@ runs:
         source ~/.bashrc
         # optional: for unixODBC development headers
         sudo apt-get install -y unixodbc-dev
+      shell: bash
