@@ -2,6 +2,9 @@ name: Install ODBC drivers for mssql
 description: Install ODBC drivers for mssql
 
 inputs:
+  ODBC_VERSION:
+    description: 'ODBC version to install (18 or 17 validated)'
+    default: "18"
   DISTRO:
     description: 'Distribution (from learn.microsoft.com/en-us/sql/connect/odbc/linux-mac/installing-the-microsoft-odbc-driver-for-sql-server)'
     default: Ubuntu
@@ -11,6 +14,7 @@ inputs:
   REMOVE_EXITS:
     default: 'true'
     description: 'Remove exit statements from the script (they break the workflow)'
+
 runs:
   using: composite
   steps:
@@ -21,4 +25,5 @@ runs:
         DISTRO: ${{ inputs.DISTRO }}
         DOCS_URL: ${{ inputs.DOCS_URL }}
         REMOVE_EXITS: ${{ inputs.REMOVE_EXITS }}
+        ODBC_VERSION: ${{ inputs.ODBC_VERSION }}
       shell: bash
