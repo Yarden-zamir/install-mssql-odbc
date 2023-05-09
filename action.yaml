@@ -1,26 +1,24 @@
 name: Install ODBC drivers for mssql
 description: Install ODBC drivers for mssql
+
+inputs:
+  DISTRO:
+    description: 'Distribution (from learn.microsoft.com/en-us/sql/connect/odbc/linux-mac/installing-the-microsoft-odbc-driver-for-sql-server)'
+    default: Ubuntu
+  DOCS_URL:
+    description: 'URL to the docs page to scrape instructions from'
+    default: "https://raw.githubusercontent.com/MicrosoftDocs/sql-docs/live/docs/connect/odbc/linux-mac/installing-the-microsoft-odbc-driver-for-sql-server.md"
+  REMOVE_EXITS:
+    default: 'true'
+    description: 'Remove exit statements from the script (they break the workflow)'
 runs:
   using: composite
   steps:
     - run: |
-        if ! [[ "18.04 20.04 22.04" == *"$(lsb_release -rs)"* ]];
-        then
-            echo "Ubuntu $(lsb_release -rs) is not currently supported.";
-            exit;
-        fi
-        
-        sudo su
-        curl https://packages.microsoft.com/keys/microsoft.asc | apt-key add -
-        
-        curl https://packages.microsoft.com/config/ubuntu/$(lsb_release -rs)/prod.list > /etc/apt/sources.list.d/mssql-release.list
-        
-        sudo apt-get update
-        sudo ACCEPT_EULA=Y apt-get install -y msodbcsql18
-        # optional: for bcp and sqlcmd
-        sudo ACCEPT_EULA=Y apt-get install -y mssql-tools18
-        echo 'export PATH="$PATH:/opt/mssql-tools18/bin"' >> ~/.bashrc
-        source ~/.bashrc
-        # optional: for unixODBC development headers
-        sudo apt-get install -y unixodbc-dev
+        pip install requests
+        python extract_instruction_from_readme.py | bash
+      env:
+        DISTRO: ${{ inputs.DISTRO }}
+        DOCS_URL: ${{ inputs.DOCS_URL }}
+        REMOVE_EXITS: ${{ inputs.REMOVE_EXITS }}
       shell: bash
