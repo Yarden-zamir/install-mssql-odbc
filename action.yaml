@@ -20,10 +20,9 @@ inputs:
 runs:
   using: composite
   steps:
-    - uses: actions/checkout@v3.5.2
     - run: |
         pip install requests
-        python extract_instruction_from_readme.py | bash
+        python ${{ github.action_path }}/extract_instruction.py | bash
       env:
         DISTRO: ${{ inputs.DISTRO }}
         DOCS_URL: ${{ inputs.DOCS_URL }}
