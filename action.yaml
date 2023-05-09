@@ -6,7 +6,7 @@ inputs:
     description: 'ODBC version to install (18 or 17 validated)'
     default: "18"
   DISTRO:
-    description: 'Distribution (from learn.microsoft.com/en-us/sql/connect/odbc/linux-mac/installing-the-microsoft-odbc-driver-for-sql-server)'
+    description: 'Distribution (from DOCS_URL)'
     default: Ubuntu
   DOCS_URL:
     description: 'URL to the docs page to scrape instructions from'
