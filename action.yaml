@@ -1,6 +1,8 @@
 name: Install ODBC drivers for mssql
 description: Install ODBC drivers for mssql
-
+branding:
+  icon: 'database'
+  color: 'green'
 inputs:
   ODBC_VERSION:
     description: 'ODBC version to install (18 or 17 validated)'
