@@ -32,5 +32,5 @@ Usage examples
           ODBC_VERSION: 17
           DISTRO: Alpine
           DOCS_URL: https://yarden-zamir.com/alternate-docs-path.md
-          REMOVE_EXITS: false
+          REMOVE_EXITS: true
 ```
