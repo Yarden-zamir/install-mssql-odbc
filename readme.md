@@ -35,7 +35,7 @@ inputs:
           REMOVE_EXITS: true
 ```
 
-## example "Proof of concept connecting to SQL using pyodbc" using this action as setup for the drivers
+## example "Proof of concept connecting to SQL using pyodbc" using this action as setup
 Taking the exact example from microsoft [here](https://learn.microsoft.com/en-us/sql/connect/python/pyodbc/step-3-proof-of-concept-connecting-to-sql-using-pyodbc?view=sql-server-ver16)
 ```yaml
       - uses: Yarden-zamir/install-mssql-odbc@main
