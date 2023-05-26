@@ -19,7 +19,7 @@ inputs:
     default: 'true'
     description: 'Remove exit statements from the script (they break the workflow)'
 ```
-Usage examples
+## Usage examples
 ```yaml
 # minimal
       - uses: Yarden-zamir/install-mssql-odbc@main
@@ -33,4 +33,34 @@ Usage examples
           DISTRO: Alpine
           DOCS_URL: https://yarden-zamir.com/alternate-docs-path.md
           REMOVE_EXITS: true
+```
+
+## example "Proof of concept connecting to SQL using pyodbc" using this action as setup for the drivers
+Taking the exact example from microsoft [here](https://learn.microsoft.com/en-us/sql/connect/python/pyodbc/step-3-proof-of-concept-connecting-to-sql-using-pyodbc?view=sql-server-ver16)
+```yaml
+      - uses: Yarden-zamir/install-mssql-odbc@main
+      - run: pip install pyodbc
+      - name: Connect 
+        shell: python
+        run: |
+          import pyodbc 
+          # Some other example server values are
+          # server = 'localhost\sqlexpress' # for a named instance
+          # server = 'myserver,port' # to specify an alternate port
+          server = 'tcp:myserver.database.windows.net' 
+          database = 'mydb' 
+          username = 'myusername' 
+          password = 'mypassword' 
+          # ENCRYPT defaults to yes starting in ODBC Driver 18. It's good to always specify ENCRYPT=yes on the client side to avoid MITM attacks.
+          cnxn = pyodbc.connect('DRIVER={ODBC Driver 18 for SQL Server};SERVER='+server+';DATABASE='+database+';ENCRYPT=yes;UID='+username+';PWD='+ password)
+          cursor = cnxn.cursor()
+      - name: Run query
+        shell: python
+        run: |
+          #Sample select query
+          cursor.execute("SELECT @@version;") 
+          row = cursor.fetchone() 
+          while row: 
+              print(row[0])
+              row = cursor.fetchone()
 ```
