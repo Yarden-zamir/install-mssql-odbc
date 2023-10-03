@@ -21,6 +21,7 @@ runs:
   using: composite
   steps:
     - run: |
+        sudo dpkg --configure -a && true
         pip install requests
         python ${{ github.action_path }}/extract_instruction.py | bash
       env:
